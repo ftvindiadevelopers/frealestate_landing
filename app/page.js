@@ -1,103 +1,168 @@
+"use client"
+
+import { useState } from "react";
+import { Navbar } from "./components/Navbar";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const projects = [
+  "./projects/project1.svg",
+  "./projects/project2.svg",
+  "./projects/project3.svg"
+]
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+export default function Home() {
+
+  const [projectShowcase, setProjectShowcase] = useState(projects[1])
+
+  return (
+    <div className="w-full h-full flex flex-col">
+      <section className="w-full h-full bg-[url('/header.svg')] min-h-screen bg-cover bg-center">
+        <Navbar />
+        <main className="w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center items-end py-[60px] px-5">
+          <div>
+            <h1
+              className="w-fit text-[4vw] text-end tracking-tight leading-[110%] 
+             bg-gradient-to-r from-[#7C7C7C] via-[#F9F8F6] to-[#7F7F7F] 
+             bg-clip-text text-transparent">
+              More than property <br /> it's a statement <br /> of
+              <span
+                className="inline-block align-middle mx-8 h-1 w-48 bg-gradient-to-r from-[#7C7C7C] via-[#F9F8F6] to-[#7F7F7F]"
+              ></span>
+              style
+            </h1>
+          </div>
+
+          <form className="bg-[#111111] px-14 py-12" action="">
+            <h2 className="text-5xl text-[#D8D8D8] font-bold">Let's Connect!</h2>
+            
+            <span>
+              <input type="text" placeholder="NAME*" 
+              className="w-full py-3 text-[#929292] text-sm px-2 border-b-[0.4px] border-[#707070]"/>
+            </span>
+          </form>
+        </main>
+      </section>
+
+      <section className="w-full h-full min-h-[150vh] bg-white pb-10 relative">
+        <Image src="./goldenF.svg" width={335} height={640} className="absolute w-fit h-fit top-0 left-10 z-10"/>
+        <Image src="./emptyDiamond.svg" width={335} height={640} className="absolute w-fit h-fit top-10 right-[-20px] z-10"/>
+        <div className="w-full h-full max-w-[1400px] mx-auto px-5 py-[100px] flex flex-col gap-5">
+          <span className="flex flex-row justify-between w-full">
+            <h4 style={{ fontFamily: 'Helvetica' }} className="text-lg tracking-wider font-semibold text-[#333333] text-center flex flex-row justify-end">ABOUT <img src="./arrowRightDown.svg" alt="" className="w-4 h-4 mt-2 ml-3"/></h4>
+            <h3
+              style={{ fontFamily: 'Bodoni' }}
+              className="text-[70px] font-bodoni gradient-text"
+            >
+              Lorem Ipsum <i className="opacity-0">Lorem </i> <br />
+              <i className="opacity-0">Lorem </i>Lorem Ipsum style
+            </h3>
+          </span>
+
+          <p className="text-xl leading-[140%] font-normal text-[#333333]">FashionTV presents F Real Estate Brand Licensing that is an entire brand vision in the luxury real estate spectrum, comprising different kinds of real estate licensing verticals, ranging from residential to commercial, including hospitality. Exploring new vistas in luxury real estate, FashionTV has extended its brand perspective into real estate developments having introduced a unique concept in the history of real estate.</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="w-full h-[550px] max-w-[1400px] mx-auto bg-[url('/reimagine.png')] p-18">
+        </div>
+
+        <h3 className="text-xl font-normal text-[#121212] text-center tracking-[12px] mt-32">OUR PROJECT'S</h3>
+
+        <div className="w-full h-[430px] bg-cover bg-[center_10%] max-w-[1400px] flex flex-row mx-auto bg-[url('/reimagine.svg')] p-18 mt-10 px-20"
+          style={{
+            backgroundImage: `url('${projectShowcase}')`
+          }}>
+          <div className="w-full h-full flex flex-col justify-between flex-2/5">
+            <span className="text-start">
+              <h3 className="text-3xl font-light uppercase text-white">LOREM IPSUM</h3>
+              <p className="text-sm uppercase font-medium text-white">STATISTICS</p>
+            </span>
+
+            <span className="text-start">
+              <h3 className="text-3xl font-light uppercase text-white">F RESIDENCES - MERLIN</h3>
+              <p className="text-sm uppercase font-medium text-white">WEST BENGAL</p>
+            </span>
+          </div>
+
+          {/* Interactive Projects */}
+          <div className="w-full h-full flex-3/5 flex flex-row justify-between gap-5">
+            <div
+              onClick={() => setProjectShowcase(projects[0])}
+              style={{
+                backgroundImage: `url('${projects[0]}')`,
+              }}
+              className={`w-full h-full p-5 bg-center bg-cover flex flex-col justify-between relative max-w-[240px] cursor-pointer transition-all duration-300 ease-in-out ${projectShowcase === projects[0] ? "filter-none" : "filter grayscale"
+                }`}
+            >
+              {projectShowcase !== projects[0] && (
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent z-0 transition-opacity duration-300" />
+              )}
+
+              <span className="relative z-10">
+                <h4 className="text-xl font-normal uppercase text-white">
+                  F RESIDENCES - H&S,
+                </h4>
+                <p className="text-sm uppercase font-normal tracking-wider text-gray-200">
+                  GREATER NOIDA
+                </p>
+              </span>
+
+              <button className="w-8 h-8 flex justify-center items-center bg-white absolute bottom-0 right-0 z-10">
+                <img src="./arrowRightDown.svg" alt="" />
+              </button>
+            </div>
+            <div
+              onClick={() => setProjectShowcase(projects[1])}
+              style={{
+                backgroundImage: `url('${projects[1]}')`,
+              }}
+              className={`w-full h-full p-5 bg-center bg-cover flex flex-col justify-between relative max-w-[240px] cursor-pointer transition-all duration-300 ease-in-out ${projectShowcase === projects[1] ? "filter-none" : "filter grayscale"
+                }`}
+            >
+              {projectShowcase !== projects[1] && (
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent z-0 transition-opacity duration-300" />
+              )}
+
+              <span className="relative z-10">
+                <h4 className="text-xl font-normal uppercase text-white">
+                  FASHIONZ
+                </h4>
+                <p className="text-sm uppercase font-normal tracking-wider text-gray-200">
+                  DUBAI
+                </p>
+              </span>
+
+              <button className="w-8 h-8 flex justify-center items-center bg-white absolute bottom-0 right-0 z-10">
+                <img src="./arrowRightDown.svg" alt="" />
+              </button>
+            </div>
+            <div
+              onClick={() => setProjectShowcase(projects[2])}
+              style={{
+                backgroundImage: `url('${projects[2]}')`,
+              }}
+              className={`w-full h-full p-5 bg-center bg-cover flex flex-col justify-between relative max-w-[240px] cursor-pointer transition-all duration-300 ease-in-out ${projectShowcase === projects[2] ? "filter-none" : "filter grayscale"
+                }`}
+            >
+              {projectShowcase !== projects[2] && (
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent z-0 transition-opacity duration-300" />
+              )}
+
+              <span className="relative z-10">
+                <h4 className="text-xl font-normal uppercase text-white">
+                  F TOWER
+                </h4>
+                <p className="text-sm uppercase font-normal tracking-wider text-gray-200">
+                  PUNE
+                </p>
+              </span>
+
+              <button className="w-8 h-8 flex justify-center items-center bg-white absolute bottom-0 right-0 z-10">
+                <img src="./arrowRightDown.svg" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
