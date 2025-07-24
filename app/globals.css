@@ -8,9 +8,23 @@
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: 'BodoniBook';
+  src: url('/fonts/bodoniBook.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaBold';
   src: url('/fonts/helveticaBold.ttf') format('truetype');
   font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url('/fonts/helvetica.ttf') format('truetype');
+  font-weight: medium;
   font-style: normal;
 }
 
@@ -21,4 +35,12 @@
 
   background-clip: text; /* for Firefox */
   color: transparent;
+}
+
+/* * {
+  border: 1px dashed black;
+} */
+
+body {
+  overflow-x: hidden;
 }
