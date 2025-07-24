@@ -1,7 +1,10 @@
+import Image from "next/image"
+
 const Footer = () => {
-    return <>
-        <div className="bg-[#0A0602] px-5 py-12">
-            <div className="max-w-[1400px] flex flex-row justify-between mx-auto items-center ">
+    return(
+        <div className="bg-[#0A0602] px-5 py-12 relative w-full h-full">
+            <Image alt="goldenFLogo" src="./dualDiamond.svg" width={335} height={640} className="absolute w-fit h-fit xl:top-10 xl:left-10 md:top-5 md:left-5 top-4 left-[-10px] z-[1]" />
+            <div className="max-w-[1400px] flex md:flex-row flex-col lg:gap-0 gap-10 justify-between mx-auto items-start ">
                 <div className="flex flex-col gap-7" >
                     <img className="w-[180px] h-full " src="./footer_logo.svg" alt="" />
                     <div className="text-[#FFFFFF] flex flex-row text-sm gap-20">
@@ -30,6 +33,6 @@ const Footer = () => {
             </div>
 
         </div>
-    </>
+    )
 }
 export default Footer 
