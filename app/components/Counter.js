@@ -17,7 +17,7 @@ export const AnimatedCounter = ({ target, suffix }) => {
     if (isInView) {
       count.set(target);
     }
-  }, [isInView, target]);
+  }, [isInView, target, count]);
 
   useEffect(() => {
     return spring.on("change", (latest) => {
