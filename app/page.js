@@ -98,7 +98,7 @@ const handleSubmit = async (e) => {
             <h1 style={{ fontFamily: 'BodoniBook' }}
               className="w-fit lg:text-[4vw] text-4xl lg:text-end text-start tracking-tight leading-[85%] 
               gradient-silver-text opacity-100">
-              More than property <br /> it's a statement of style
+              More than property <br /> it&apos;s a statement of style
             </h1>
           </div>
 
@@ -143,7 +143,7 @@ const handleSubmit = async (e) => {
         <div className="w-full h-full max-w-[1400px] mx-auto lg:py-[100px] py-10 flex flex-col gap-5 px-5">
           <span className="flex flex-row justify-between w-full">
             <h4
-              style={{ fontFamily: 'HelveticaBold' }} className="lg:text-lg text-sm tracking-wider font-semibold text-[#333333] text-center flex flex-row justify-end mt-1">ABOUT <img src="./arrowRightDown.svg" alt="" className="lg:w-4 lg:h-4 h-3 w-3 mt-2 ml-3" /></h4>
+              style={{ fontFamily: 'HelveticaBold' }} className="lg:text-lg text-sm tracking-wider font-semibold text-[#333333] text-center flex flex-row justify-end mt-1">ABOUT <Image height={10} width={10} src="./arrowRightDown.svg" alt="" className="lg:w-4 lg:h-4 h-3 w-3 mt-2 ml-3" /></h4>
             <h3
               style={{ fontFamily: 'Times new roman' }}
               className="lg:text-[70px] md:text-4xl text-2xl gradient-text relative"
@@ -164,7 +164,7 @@ const handleSubmit = async (e) => {
             <span
 
               className="w-fit h-full flex flex-col">
-              <h4 style={{ fontFamily: 'HelveticaBold' }} className="lg:text-lg text-sm tracking-wider font-semibold text-[#333333] text-center flex flex-row justify-start">STATISTICS <img src="./arrowRightDown.svg" alt="" className="w-4 h-4 mt-2 ml-3" /></h4>
+              <h4 style={{ fontFamily: 'HelveticaBold' }} className="lg:text-lg text-sm tracking-wider font-semibold text-[#333333] text-center flex flex-row justify-start">STATISTICS <Image height={10} width={10} src="./arrowRightDown.svg" alt="" className="w-4 h-4 mt-2 ml-3" /></h4>
               <Image src="/fDiamond.svg" alt="fdiamond" width={300} height={300} className="lg:w-34 lg:h-34 w-14 h-12 lg:mt-8" />
             </span>
             <h3
