@@ -38,6 +38,15 @@
   color: transparent;
 }
 
+.gradient-silver-text {
+  background: linear-gradient(98deg, #7C7C7C -15.2%, #696969 5.73%, #F9F8F6 33.16%, #D4D4D4 68.71%, #7F7F7F 104.45%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text; /* Firefox */
+  color: transparent;
+}
+
 /* * {
   border: 1px dashed black;
 } */
@@ -60,4 +69,8 @@ body {
 
 .keen-slider__slide {
   min-width: unset !important;
+}
+
+#messageTextarea::-webkit-scrollbar {
+  display: none;
 }

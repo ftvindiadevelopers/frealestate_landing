@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.23.9",
     "keen-slider": "^6.8.6",
     "next": "15.4.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
