@@ -11,8 +11,13 @@
   "dependencies": {
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.9",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "keen-slider": "^6.8.6",
+    "mysql2": "^3.14.2",
     "next": "15.4.3",
+    "nodemailer": "^7.0.5",
+    "path": "^0.12.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",

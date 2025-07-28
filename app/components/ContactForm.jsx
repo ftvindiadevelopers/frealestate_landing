@@ -22,58 +22,59 @@ export default function MultiStepForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setMessage('');
+        console.log(formData)
+        // setMessage('');
 
-        // Validation
-        const { name, contact, email, vertical, investmentCapacity, state, city, message } = formData;
+        // // Validation
+        // const { name, contact, email, vertical, investmentCapacity, state, city, message } = formData;
 
-        if (!name || !contact || !email || !vertical || !investmentCapacity || !state || !city || !message) {
-            setMessage('Please fill in all the fields.');
-            return;
-        }
+        // if (!name || !contact || !email || !vertical || !investmentCapacity || !state || !city || !message) {
+        //     setMessage('Please fill in all the fields.');
+        //     return;
+        // }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            setMessage('Please enter a valid email.');
-            return;
-        }
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!emailRegex.test(email)) {
+        //     setMessage('Please enter a valid email.');
+        //     return;
+        // }
 
-        const phoneRegex = /^[0-9]{10}$/;
-        if (!phoneRegex.test(contact)) {
-            setMessage('Please enter a valid 10-digit number.');
-            return;
-        }
+        // const phoneRegex = /^[0-9]{10}$/;
+        // if (!phoneRegex.test(contact)) {
+        //     setMessage('Please enter a valid 10-digit number.');
+        //     return;
+        // }
 
-        try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+        // try {
+        //     const res = await fetch('/api/contact', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(formData),
+        //     });
 
-            const data = await res.json();
+        //     const data = await res.json();
 
-            if (res.ok) {
-                setMessage('Contact submitted successfully!');
-                setFormData({
-                    name: '',
-                    contact: '',
-                    email: '',
-                    vertical: '',
-                    investmentCapacity: '',
-                    state: '',
-                    city: '',
-                    message: ''
-                });
-            } else {
-                setMessage(data.error || 'Something went wrong');
-            }
-        } catch (err) {
-            console.error(err);
-            setMessage('Server error');
-        }
+        //     if (res.ok) {
+        //         setMessage('Contact submitted successfully!');
+        //         setFormData({
+        //             name: '',
+        //             contact: '',
+        //             email: '',
+        //             vertical: '',
+        //             investmentCapacity: '',
+        //             state: '',
+        //             city: '',
+        //             message: ''
+        //         });
+        //     } else {
+        //         setMessage(data.error || 'Something went wrong');
+        //     }
+        // } catch (err) {
+        //     console.error(err);
+        //     setMessage('Server error');
+        // }
     };
 
     return (
@@ -219,8 +220,8 @@ export default function MultiStepForm() {
                                 ></textarea>
                             </div>
 
-                        <div className="md:w-fit w-full">
-                            <button type="button" onClick={handleNext} className="text-black bg-white flex justify-center items-center uppercase md:mt-4 mt-6 text-xs p-2 border-[1px] hover:bg-[#111111] hover:text-[#fff] border-[#cacaca] md:rounded-full md:h-18 h-10 md:w-18 w-full md:ml-2 font-medium">Send</button>
+                        <div className="md:w-fit w-full z-10">
+                            <button onClick={() => handleSubmit()} className="text-black bg-white flex justify-center items-center uppercase md:mt-4 mt-6 text-xs p-2 border-[1px] hover:bg-[#111111] hover:text-[#fff] border-[#cacaca] md:rounded-full md:h-18 h-10 md:w-18 w-full md:ml-2 font-medium">Send</button>
                         </div>
                         </div>
 

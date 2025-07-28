@@ -57,17 +57,17 @@ export default function ProjectsCarousel({ projects }) {
   }, [emblaApi])
 
   return (
-    <div className="relative bg-black text-white py-20 px-4">
+    <div className="relative bg-black text-white py-20 px-7">
       <Image alt="goldenFLogo" src="./goldenFDark.svg" width={335} height={640} className="absolute w-[300px] h-fit bottom-0 left-0 z-[1]" />
       <h2 style={{ fontFamily: 'Bodoni' }} className="gradient-text lg:text-6xl md:text-4xl text-2xl font-serif text-center mb-10 tracking-wider">
         OUR PROJECTS
       </h2>
 
-      <div style={{ backgroundImage: `url(${projectData[currentIndex].image})`, transition: 'background-image 0.2s ease-in-out', }} className="bg-cover bg-top py-10 px-16 max-w-[1400px] mx-auto flex flex-col lg:flex-row items-end justify-start gap-8 rounded-lg relative transition-transform duration-300 ease-in-out z-[2]">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1d1d1d10] via-[#000000b9] to-[#2e2e2e1e] z-[2] rounded-sm" />
+      <div style={{ backgroundImage: `url(${projectData[currentIndex].image})`, transition: 'background-image 0.2s ease-in-out', }} className="bg-cover bg-top lg:py-10 lg:px-16 p-8 max-w-[1400px] mx-auto flex flex-col lg:flex-row items-end justify-start gap-8 rounded-lg relative transition-transform duration-300 ease-in-out z-[2]">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1d1d1dd3]  to-[#2e2e2e1e] z-[2] rounded-sm" />
         {/* LEFT TEXT BLOCK */}
-        <div style={{ fontFamily: 'Bodoni' }} className="w-full lg:w-2/5 text-left h-full z-[3]">
-          <h3 className="text-3xl font-light uppercase mb-2">
+        <div style={{ fontFamily: 'Bodoni' }} className="w-full lg:w-2/5 text-left h-full z-[3] flex flex-col">
+          <h3 className="text-3xl font-light uppercase mb-0">
             {projectData[currentIndex].title}
           </h3>
           <p style={{ fontFamily: 'Helvetica' }} className="text-md uppercase font-medium tracking-wider text-gray-300">
@@ -81,7 +81,7 @@ export default function ProjectsCarousel({ projects }) {
             {projectData.map((project, index) => (
               <div
                 key={index}
-                className="embla__slide shrink-0 w-[100%] sm:w-1/2 lg:w-[260px] md:h-[350px]  cursor-pointer mx-2"
+                className="embla__slide shrink-0 w-[100%] sm:w-1/2 lg:w-[260px]  md:h-[350px]  cursor-pointer mx-2"
                 onClick={() => {
                   emblaApi?.scrollTo(index)
                   indexRef.current = index
@@ -90,7 +90,7 @@ export default function ProjectsCarousel({ projects }) {
               >
                 <div
                   style={{ backgroundImage: `url('${project.image}')`, filter: index !== currentIndex ? "grayscale(100%)" : "grayscale(0)" }}
-                  className="relative h-[350px] lg:w-[260px] md:h-[350px]  bg-cover bg-center rounded-sm overflow-hidden"
+                  className="relative h-[350px] lg:w-[260px] md:h-[350px] w-[300px] bg-cover bg-center rounded-sm overflow-hidden"
                 >
                   {index !== currentIndex && (
                     <div className="absolute inset-0 w-full h-full lg:bg-gradient-to-br bg-gradient-to-r top-0 from-[#000000c7] to-[#2e2e2e31] z-[2] rounded-sm" />
