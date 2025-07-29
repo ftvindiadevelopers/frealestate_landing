@@ -421,9 +421,9 @@ export default function Home() {
                 type="email"
                 required
                 placeholder="Enter your email"
-                className="text-base bg-white w-full px-4 py-3"
+                className="md:text-base bg-white w-full h-10 px-4 md:py-3 py-2 text-xs"
               />
-              <button type="submit" className="bg-[#121A27] px-8 text-xs tracking-wider text-white cursor-pointer">
+              <button type="submit" className="bg-[#121A27] md:px-8 text-xs tracking-wider text-white cursor-pointer w-fit h-10 px-2 placeholder:text-xs">
                 DOWNLOAD
               </button>
             </form>
