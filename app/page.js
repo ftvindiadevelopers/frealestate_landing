@@ -211,14 +211,14 @@ export default function Home() {
 
   return (
     <div className="w-full h-full flex flex-col pt-[100vh] overflow-x-hidden">
-      <section className="w-full h-full min-h-[700px] flex items-end bg-[url('/header.svg')] bg-cover bg-center fixed top-0">
+      <section className="w-full h-full min-h-[700px] flex flex-col items-end bg-[url('/header.svg')] bg-cover bg-center fixed top-0">
         <video src="./headerBg.mp4" className="w-full h-full md:block hidden absolute top-0 left-0 right-0 bottom-0 object-cover object-center z-[1]" autoPlay loop muted></video>
         <div className="w-full md:block hidden h-full fixed bg-gradient-to-b from-[#000000be] to-[#0000] top-0 left-0 z-[2]"></div>
         <Navbar />
-        <main className="w-full h-full max-w-[1400px] mx-auto flex flex-col gap-0 justify-center md:items-end items-start lg:pt-[20px] pt-[14vh] px-5 z-[3] relative">
+        <main className="w-full h-full max-w-[1400px] mx-auto flex flex-col gap-0 justify-center md:items-end items-start lg:pt-[20px] pt-[0vh] px-5 z-[3] relative">
           <div className="w-fit  md:mx-0">
             <h1 style={{ fontFamily: 'BodoniBook' }}
-              className="w-fit lg:text-[4vw] text-4xl lg:text-end text-start tracking-tight md:leading-[75%] leading-[80%] 
+              className="w-fit lg:text-[4vw] text-[8vw] lg:text-end text-start tracking-tight md:leading-[75%] leading-[80%] 
               text-[#fff] opacity-100">
               More than property <br /> it&apos;s a statement of style
             </h1>
@@ -226,8 +226,8 @@ export default function Home() {
 
           <div className="bg-gradient-to-br from-[#111111] to-[#060606] md:w-[530px] md:max-w-[530px]  max-w-[420px]  lg:p-8 p-5 rounded-xl lg:mt-10 mt-6 mb-6 w-full h-fit">
             <h1 style={{ fontFamily: 'Helvetica' }} className="text-white lg:text-xl text-sm uppercase font-light pb-2 max-w-full">Start your brand licensing <br /> journey here</h1>
-            <form className="text-white text-xs w-full flex flex-col gap-2 mt-2">
-              <div className="flex lg:flex-row flex-col lg:gap-4 gap-2 w-full">
+            <form className="text-white text-xs w-full flex flex-col md:gap-2 gap-1 mt-2">
+              <div className="flex flex-row gap-4 w-full">
                 <div className="w-full lg:basis-1/2">
                   <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} name="name" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full bg-transparent" type="text" placeholder="NAME" />
                   {formErrors.name && <span className="text-red-400 text-xs">{formErrors.name}</span>}
@@ -301,7 +301,7 @@ export default function Home() {
               </div>
 
               <div className="my-2 flex flex-col placeholder-[#EBEBEB]">
-                <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} name="message" className="outline-none border-b min-h-14 placeholder-[#EBEBEB]" placeholder="MESSAGE"></textarea>
+                <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} name="message" className="outline-none border-b md:min-h-14 placeholder-[#EBEBEB]" placeholder="MESSAGE"></textarea>
                 {formErrors.message && <span className="text-red-400 text-xs">{formErrors.message}</span>}
 
                 <button onClick={handleSubmit} style={{ fontFamily: 'Helvetica' }} className="uppercase font-medium lg:mt-5 mt-4 lg:p-3 p-2 tracking-wider lg:text-sm text-xs bg-[linear-gradient(90deg,_#84613B_-10.87%,_#AA8B55_5.15%,_#A48454_13.62%,_#C7B07C_31.26%,_#BFA573_46.14%,_#C5AD78_55.71%,_#C1A670_83.29%,_#EAD9A1_99.8%)] cursor-pointer mb-1">
@@ -320,7 +320,7 @@ export default function Home() {
 
       <section className="w-full h-full lg:min-h-[150vh] bg-white relative">
         <Image alt="goldenFLogo" src="./goldenF.svg" width={335} height={640} className="absolute lg:w-fit lg:h-fit w-[50px] top-[14vh] lg:left-10 left-4 z-[1]" />
-        <Image alt="goldenFLogo" src="./emptyDiamond.svg" width={335} height={640} className="absolute lg:w-fit lg:h-fit w-[70px] top-10 right-0 z-10" />
+        <Image alt="goldenFLogo" src="./emptyDiamond.svg" width={335} height={640} className="absolute lg:w-fit lg:h-fit w-[70px] top-10 right-0 md:z-10 z-0" />
         <div className="w-full h-full max-w-[1400px] mx-auto lg:py-[100px] pt-20 pb-5 flex flex-col gap-5 px-7">
           <span className="flex flex-row justify-between w-full">
             <h4
@@ -335,7 +335,7 @@ export default function Home() {
           </span>
 
           <p
-            className="lg:text-xl text-sm text-justify leading-[140%] font-normal text-[#333333]">F Real Estate by FashionTV offers exclusive licensing that transforms real estate projects into globally branded, high-style developments, blending signature designs with international recognition. Transform your vision into a high-style, globally admired project. With FashionTV’s signature design sensibility and international visibility, your development gains a bold market advantage, attracting premium buyers and standing apart through a unique blend of fashion, luxury, and architectural sophistication.</p>
+            className="lg:text-xl text-sm text-justify leading-[140%] font-normal text-[#333333] z-10">F Real Estate by FashionTV offers exclusive licensing that transforms real estate projects into globally branded, high-style developments, blending signature designs with international recognition. Transform your vision into a high-style, globally admired project. With FashionTV’s signature design sensibility and international visibility, your development gains a bold market advantage, attracting premium buyers and standing apart through a unique blend of fashion, luxury, and architectural sophistication.</p>
         </div>
 
         <div className="lg:w-[calc(100%-3vw)] w-[calc(100%-40px)] lg:h-[550px] h-[240px] max-w-[1400px] mx-auto bg-[url('/reimagine.png')] bg-cover rounded-md p-18 relative z-[1] lg:mb-10 origin-bottom"></div>
