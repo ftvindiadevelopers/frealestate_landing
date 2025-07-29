@@ -2,8 +2,8 @@ import {connectToDatabase, closeDatabaseConnection} from '../config/database.js'
 
 export async function createEnquiry(enquiryData) {
     const connecting = await connectToDatabase();
-    const {name, email, mobile, vertical, investment, state, city, message} = enquiryData;
-    if (!name || !email || !mobile || !vertical || !investment || !state || !city) {
+    const {name, email, mobile, verticalCategory, verticalName,developerName, projectNumber, state, city, message} = enquiryData;
+    if (!name || !email || !mobile || !verticalCategory || !verticalName || !developerName || !projectNumber || !state || !city) {
         throw new Error('All fields are required');
     }
     if (!/^[a-zA-Z\s]+$/.test(name)) {
@@ -15,10 +15,16 @@ export async function createEnquiry(enquiryData) {
     if (!/^\d{10}$/.test(mobile)) {
         throw new Error('Mobile number must be 10 digits');
     }
-    if (!/^[a-zA-Z\s]+$/.test(vertical)) {
+    if (!/^[a-zA-Z\s]+$/.test(verticalName)) {
         throw new Error('Vertical must contain only letters and spaces');
     }
-    if (!/^[a-zA-Z0-9\s]+$/.test(investment)) {
+    if (!/^[a-zA-Z\s]+$/.test(verticalCategory)) {
+      throw new Error('Vertical must contain only letters and spaces');
+    }
+    if (!/^[a-zA-Z\s]+$/.test(developerName)) {
+      throw new Error('Vertical must contain only letters and spaces');
+    }
+    if (!/^[a-zA-Z0-9\s]+$/.test(projectNumber)) {
         throw new Error('Investment must contain only letters, numbers, and spaces');
     }
     if (!/^[a-zA-Z\s]+$/.test(state)) {
@@ -30,8 +36,8 @@ export async function createEnquiry(enquiryData) {
     // if (!enquiryData.message || enquiryData.message.length < 10) {
     //     throw new Error('Message must be at least 10 characters long');
     // }
- const query = 'INSERT INTO enquiries (full_name, email, mobile, vertical, investment, state, city,message) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    const values = [name, email, mobile, vertical, investment, state, city, message];
+ const query = 'INSERT INTO enquiries (full_name, email, mobile, verticalcategory,verticalname,developername,projects, state, city,message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const values = [name, email, mobile, verticalCategory,verticalName, developerName,projectNumber, state, city, message];
     try {
         const [result] = await connecting.execute(query, values);
         return result.insertId;
