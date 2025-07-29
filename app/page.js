@@ -397,7 +397,6 @@ export default function Home() {
                   Sq. Ft. Designed
                 </p>
               </span>
-
             </span>
           </div>
         </div>

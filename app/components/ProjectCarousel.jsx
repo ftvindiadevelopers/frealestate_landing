@@ -189,7 +189,7 @@ useEffect(() => {
             {projectData.map((project, index) => (
               <div
                 key={index}
-                className="embla__slide shrink-0 w-[100%] sm:w-1/2 lg:w-[260px]  md:h-[350px]  cursor-pointer mx-2"
+                className="embla__slide shrink-0 w-[100%] h-fit sm:w-full lg:w-[260px]  md:h-[350px]  cursor-pointer md:mx-2"
                 onClick={() => {
                   emblaApi?.scrollTo(index)
                   indexRef.current = index
@@ -198,7 +198,7 @@ useEffect(() => {
               >
                 <div
                   style={{ backgroundImage: `url('${project.img}')`, filter: index !== currentIndex ? "grayscale(100%)" : "grayscale(0)" }}
-                  className="relative h-[350px] lg:w-[260px] md:h-[350px] w-[300px] bg-cover bg-center rounded-sm overflow-hidden"
+                  className="relative h-[340px] lg:w-[260px] md:h-[350px] w-fit min-w-full bg-cover bg-center rounded-sm overflow-hidden"
                 >
                   {index !== currentIndex && (
                     <div className="absolute inset-0 w-full h-full lg:bg-gradient-to-br bg-gradient-to-r top-0 from-[#000000c7] to-[#2e2e2e31] z-[2] rounded-sm" />
@@ -213,7 +213,7 @@ useEffect(() => {
                     </p>
                   </div>
 
-                  <a target='_blank' href={project.url} style={{ backgroundColor: currentIndex != index ? "#fff" : '#121212' }} className="absolute bottom-0 right-0  p-2 z-[3]">
+                  <a target='_blank' href={project.url} style={{ backgroundColor: currentIndex != index ? "#fff" : '#121212' }} className="absolute bottom-0  right-0  p-2 z-[3] w-fit">
                     <FiArrowDownRight style={{ color: currentIndex == index ? "#fff" : '#121212', fontSize: '25px' }} />
                   </a>
                 </div>
