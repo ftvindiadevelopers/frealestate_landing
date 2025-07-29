@@ -6,6 +6,7 @@ import Image from "next/image";
 import Footer from "./components/Footer";
 import ProjectsCarousel from "./components/ProjectCarousel";
 import { AnimatedCounter } from "./components/Counter";
+import { useRouter } from "next/navigation";
 
 const projects = [
   "/projects/project1.svg",
@@ -30,7 +31,7 @@ export default function Home() {
 
 
   const [formErrors, setFormErrors] = useState({});
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('Connect Now');
   const [authToken, setAuthToken] = useState("")
   const [states, setStates] = useState([])
   const [cities, setCities] = useState([])
@@ -38,6 +39,8 @@ export default function Home() {
   const [capacities, setCapacities] = useState([])
 
   const [saleskitEmail, setSaleskitEmail] = useState({ email: "" })
+
+  const router = useRouter()
 
   useEffect(() => {
     fetch("https://geoapi.ftvassets.in:4001/api/getaccesstoken", {
@@ -126,9 +129,6 @@ export default function Home() {
   };
 
   const submitSaleskitEmail = async (e) => {
-    // if (!saleskitEmail) {
-    //   return
-    // }
     try {
       const res = await fetch('/api/saleskits', {
         method: 'POST',
@@ -143,14 +143,12 @@ export default function Home() {
     }
     catch (err) {
       console.error(err);
-      setMessage('Server error');
     }
 
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
     setFormErrors({}); // Clear previous errors
 
     const errors = {};
@@ -177,16 +175,18 @@ export default function Home() {
     }
 
     try {
+      setMessage("Please wait....")
       const res = await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+    
+
 
       const data = await res.json();
 
       if (res.ok) {
-        setMessage('Contact submitted successfully!');
         setFormData({
           name: '',
           mobile: '',
@@ -199,12 +199,15 @@ export default function Home() {
           city: '',
           message: ''
         });
+        setMessage("Submitted successfully!")
+        router.push('/thankyou')
       } else {
-        setMessage(data.error || 'Something went wrong');
+        console.log(res)
+        setMessage("Please try again!")
       }
     } catch (err) {
       console.error(err);
-      setMessage('Server error');
+      setMessage("Error occured!")
     }
   };
 
@@ -305,7 +308,7 @@ export default function Home() {
                 {formErrors.message && <span className="text-red-400 text-xs">{formErrors.message}</span>}
 
                 <button onClick={handleSubmit} style={{ fontFamily: 'Helvetica' }} className="uppercase font-medium lg:mt-5 mt-4 lg:p-3 p-2 tracking-wider lg:text-sm text-xs bg-[linear-gradient(90deg,_#84613B_-10.87%,_#AA8B55_5.15%,_#A48454_13.62%,_#C7B07C_31.26%,_#BFA573_46.14%,_#C5AD78_55.71%,_#C1A670_83.29%,_#EAD9A1_99.8%)] cursor-pointer mb-1">
-                  <p className="gradient-text-btn">Connect now</p>
+                  <p className="gradient-text-btn">{message}</p>
                 </button>
               </div>
             </form>
