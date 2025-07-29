@@ -29,7 +29,8 @@ export default function Home() {
   })
 
 
-  const [message, setMessage] = useState("")
+  const [formErrors, setFormErrors] = useState({});
+  const [message, setMessage] = useState('');
   const [authToken, setAuthToken] = useState("")
   const [states, setStates] = useState([])
   const [cities, setCities] = useState([])
@@ -125,9 +126,9 @@ export default function Home() {
   };
 
   const submitSaleskitEmail = async (e) => {
-    if (!saleskitEmail) {
-      return
-    }
+    // if (!saleskitEmail) {
+    //   return
+    // }
     try {
       const res = await fetch('/api/saleskits', {
         method: 'POST',
@@ -150,37 +151,37 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    setFormErrors({}); // Clear previous errors
 
-    // Validation
-    const { name, mobile, email, verticalCategory, verticalName, state, city, message } = formData;
+    const errors = {};
+    const { name, mobile, email, verticalCategory, verticalName, developerName, projectNumber, state, city, message: userMessage } = formData;
 
-    if (!name || !mobile || !email || !verticalCategory || !verticalName || !state || !city || !message) {
-      setMessage('Please fill in all the fields.');
-      return;
-    }
+    if (!name) errors.name = "Name is required.";
+    if (!mobile) errors.mobile = "Mobile number is required.";
+    else if (!/^[0-9]{10}$/.test(mobile)) errors.mobile = "Enter a valid 10-digit number.";
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setMessage('Please enter a valid email.');
-      return;
-    }
+    if (!email) errors.email = "Email is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Enter a valid email.";
 
-    const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(mobile)) {
-      setMessage('Please enter a valid 10-digit number.');
+    if (!verticalCategory) errors.verticalCategory = "Choose a vertical category.";
+    if (!verticalName) errors.verticalName = "Select a vertical.";
+    if (!developerName) errors.developerName = "Developer name is required.";
+    if (!projectNumber) errors.projectNumber = "Enter number of projects.";
+    if (!state) errors.state = "Select a state.";
+    if (!city) errors.city = "Select a city.";
+    if (!userMessage) errors.message = "Message cannot be empty.";
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
       return;
     }
 
     try {
       const res = await fetch('/api/enquiry', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
-
 
       const data = await res.json();
 
@@ -192,6 +193,8 @@ export default function Home() {
           email: '',
           verticalCategory: '',
           verticalName: '',
+          developerName: '',
+          projectNumber: '',
           state: '',
           city: '',
           message: ''
@@ -205,13 +208,14 @@ export default function Home() {
     }
   };
 
+
   return (
     <div className="w-full h-full flex flex-col pt-[100vh] overflow-x-hidden">
       <section className="w-full h-full min-h-[700px] flex items-end bg-[url('/header.svg')] bg-cover bg-center fixed top-0">
         <video src="./headerBg.mp4" className="w-full h-full md:block hidden absolute top-0 left-0 right-0 bottom-0 object-cover object-center z-[1]" autoPlay loop muted></video>
         <div className="w-full md:block hidden h-full fixed bg-gradient-to-b from-[#000000be] to-[#0000] top-0 left-0 z-[2]"></div>
         <Navbar />
-        <main className="w-full h-full max-h-[800px] max-w-[1400px] mx-auto flex flex-col gap-0 justify-center md:items-end items-start lg:pt-[20px] pt-[20vh] px-5 z-[3] relative">
+        <main className="w-full h-full max-w-[1400px] mx-auto flex flex-col gap-0 justify-center md:items-end items-start lg:pt-[20px] pt-[14vh] px-5 z-[3] relative">
           <div className="w-fit  md:mx-0">
             <h1 style={{ fontFamily: 'BodoniBook' }}
               className="w-fit lg:text-[4vw] text-4xl lg:text-end text-start tracking-tight md:leading-[75%] leading-[80%] 
@@ -220,79 +224,92 @@ export default function Home() {
             </h1>
           </div>
 
-          <div className="bg-gradient-to-br from-[#111111] to-[#060606] md:w-[530px] md:max-w-[530px]  max-w-[420px]  lg:p-8 p-5 rounded-xl lg:mt-10 mt-6 mb-6 w-full h-full">
+          <div className="bg-gradient-to-br from-[#111111] to-[#060606] md:w-[530px] md:max-w-[530px]  max-w-[420px]  lg:p-8 p-5 rounded-xl lg:mt-10 mt-6 mb-6 w-full h-fit">
             <h1 style={{ fontFamily: 'Helvetica' }} className="text-white lg:text-xl text-sm uppercase font-light pb-2 max-w-full">Start your brand licensing <br /> journey here</h1>
             <form className="text-white text-xs w-full flex flex-col gap-2 mt-2">
               <div className="flex lg:flex-row flex-col lg:gap-4 gap-2 w-full">
-                <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} name="name" className="outline-none border-b border-[#EBEBEB]  lg:py-4 py-3 placeholder-[#EBEBEB] lg:w-fit w-full bg-transparent lg:basis-1/2 basis-full" type="text" placeholder="NAME" />
-                <input value={formData.mobile} onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))} name="mobile" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] lg:w-fit w-full lg:basis-1/2 basis-full" type="tel" placeholder="CONTACT" />
-              </div>
-              <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} name="email" className="outline-none border-b border-[#EBEBEB]  lg:py-4 py-3 placeholder-[#EBEBEB] w-full lg:basis-1/3 basis-full" type="email" placeholder="EMAIL" />
-              <div className="lg:my-1 my-0 flex justify-between gap-4 text-xs">
-                <select value={formData.verticalCategory} onChange={(e) => setFormData((prev) => ({ ...prev, verticalCategory: e.target.value }))} className="w-full border-b outline-none lg:py-4 py-2 uppercase focus:outline-none" name="verticalCategory" id="">
-                  <option className="bg-[#111111] text-white border-none outline-0" value="">CHOOSE VERTICAL CATEGORY</option>
-                  <option className="bg-[#111111] text-white" value="Residential">Residential</option>
-                  <option className="bg-[#111111] text-white" value="Commercial">Commercial</option>
-                  <option className="bg-[#111111] text-white" value="Hospitality">Hospitality</option>
-                </select>
-                <select value={formData.verticalName} onChange={(e) => setFormData((prev) => ({ ...prev, verticalName: e.target.value }))} className="w-full border-b outline-none lg:py-4 py-2 uppercase" name="verticalName" id="">
-                  <option className="bg-[#111111] text-white" value="">VERTICAL</option>
-                  {capacities.map((capacity, index) => (
-                    <option className="bg-[#111111] text-white" key={index} value={capacity}>
-                      {capacity}
-                    </option>
-                  ))}
-                </select>
+                <div className="w-full lg:basis-1/2">
+                  <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} name="name" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full bg-transparent" type="text" placeholder="NAME" />
+                  {formErrors.name && <span className="text-red-400 text-xs">{formErrors.name}</span>}
+                </div>
+
+                <div className="w-full lg:basis-1/2">
+                  <input value={formData.mobile} onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))} name="mobile" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full" type="tel" placeholder="CONTACT" />
+                  {formErrors.mobile && <span className="text-red-400 text-xs">{formErrors.mobile}</span>}
+                </div>
               </div>
 
-              <div className="flex lg:flex-row flex-row justify-between gap-4">
-                <input value={formData.developerName} onChange={(e) => setFormData((prev) => ({ ...prev, developerName: e.target.value }))} name="developerName" className="outline-none border-b border-[#EBEBEB]  lg:py-4 py-3 placeholder-[#EBEBEB] lg:w-fit w-full bg-transparent lg:basis-1/2 basis-full" type="text" placeholder="DEVELOPER NAME" />
-                <input value={formData.projectNumber} onChange={(e) => setFormData((prev) => ({ ...prev, projectNumber: e.target.value }))} name="projectNumber" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] lg:w-fit w-full lg:basis-1/2 basis-full" type="text" placeholder="NUMBER OF PROJECTS" />
+              <div>
+                <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} name="email" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full" type="email" placeholder="EMAIL" />
+                {formErrors.email && <span className="text-red-400 text-xs">{formErrors.email}</span>}
               </div>
 
-              <div className="flex lg:flex-row flex-row justify-between gap-4">
-                <select
-                  value={formData.state}
-                  onChange={handleStateChange}
-                  name="state"
-                  className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] lg:w-fit w-full md:max-w-1/2 lg:basis-1/2 basis-full"
-                >
-                  <option className="bg-[#111111] text-white border-none outline-0" value="">
-                    SELECT STATE
-                  </option>
-                  {states.map((state, index) => (
-                    <option className="bg-[#111111] text-white" key={index} value={state.state_name}>
-                      {state.state_name}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={formData.city}
-                  onChange={(e) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      city: e.target.value,
-                    }))
-                  }
-                  name="city"
-                  className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] lg:w-fit w-full lg:basis-1/2 basis-full"
-                >
-                  <option className="bg-[#111111] text-white border-none outline-0" value="">
-                    SELECT CITY
-                  </option>
-                  {cities.map((city, index) => (
-                    <option className="bg-[#111111] text-white" key={index} value={city.city_name}>
-                      {city.city_name}
-                    </option>
-                  ))}
-                </select>
+              <div className="lg:my-1 my-0 flex flex-col lg:flex-row justify-between gap-4 text-xs">
+                <div className="w-full">
+                  <select value={formData.verticalCategory} onChange={(e) => setFormData((prev) => ({ ...prev, verticalCategory: e.target.value }))} className="w-full border-b outline-none lg:py-4 py-2 uppercase focus:outline-none" name="verticalCategory">
+                    <option className="bg-[#111111] text-white" value="">CHOOSE VERTICAL CATEGORY</option>
+                    <option className="bg-[#111111] text-white" value="Residential">Residential</option>
+                    <option className="bg-[#111111] text-white" value="Commercial">Commercial</option>
+                    <option className="bg-[#111111] text-white" value="Hospitality">Hospitality</option>
+                  </select>
+                  {formErrors.verticalCategory && <span className="text-red-400 text-xs">{formErrors.verticalCategory}</span>}
+                </div>
+
+                <div className="w-full">
+                  <select value={formData.verticalName} onChange={(e) => setFormData((prev) => ({ ...prev, verticalName: e.target.value }))} className="w-full border-b outline-none lg:py-4 py-2 uppercase" name="verticalName">
+                    <option className="bg-[#111111] text-white" value="">VERTICAL</option>
+                    {capacities.map((capacity, index) => (
+                      <option className="bg-[#111111] text-white" key={index} value={capacity}>{capacity}</option>
+                    ))}
+                  </select>
+                  {formErrors.verticalName && <span className="text-red-400 text-xs">{formErrors.verticalName}</span>}
+                </div>
               </div>
+
+              <div className="flex flex-row justify-between gap-4">
+                <div className="w-full lg:basis-1/2">
+                  <input value={formData.developerName} onChange={(e) => setFormData((prev) => ({ ...prev, developerName: e.target.value }))} name="developerName" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full bg-transparent" type="text" placeholder="DEVELOPER NAME" />
+                  {formErrors.developerName && <span className="text-red-400 text-xs">{formErrors.developerName}</span>}
+                </div>
+
+                <div className="w-full lg:basis-1/2">
+                  <input value={formData.projectNumber} onChange={(e) => setFormData((prev) => ({ ...prev, projectNumber: e.target.value }))} name="projectNumber" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full" type="text" placeholder="NUMBER OF PROJECTS" />
+                  {formErrors.projectNumber && <span className="text-red-400 text-xs">{formErrors.projectNumber}</span>}
+                </div>
+              </div>
+
+              <div className="flex flex-row justify-between gap-4">
+                <div className="w-full lg:basis-1/2">
+                  <select value={formData.state} onChange={handleStateChange} name="state" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full">
+                    <option className="bg-[#111111] text-white" value="">SELECT STATE</option>
+                    {states.map((state, index) => (
+                      <option className="bg-[#111111] text-white" key={index} value={state.state_name}>{state.state_name}</option>
+                    ))}
+                  </select>
+                  {formErrors.state && <span className="text-red-400 text-xs">{formErrors.state}</span>}
+                </div>
+
+                <div className="w-full lg:basis-1/2">
+                  <select value={formData.city} onChange={(e) => setFormData((prev) => ({ ...prev, city: e.target.value }))} name="city" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full">
+                    <option className="bg-[#111111] text-white" value="">SELECT CITY</option>
+                    {cities.map((city, index) => (
+                      <option className="bg-[#111111] text-white" key={index} value={city.city_name}>{city.city_name}</option>
+                    ))}
+                  </select>
+                  {formErrors.city && <span className="text-red-400 text-xs">{formErrors.city}</span>}
+                </div>
+              </div>
+
               <div className="my-2 flex flex-col placeholder-[#EBEBEB]">
-                <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} name="message" className="outline-none border-b min-h-14  placeholder-[#EBEBEB]" id="" placeholder="MESSAGE"></textarea>
-                <button onClick={handleSubmit} style={{ fontFamily: 'Helvetica' }} className="uppercase  font-normal lg:mt-5 mt-4 lg:p-4 p-2 tracking-wider lg:text-sm text-xs bg-[linear-gradient(90deg,_#84613B_-10.87%,_#AA8B55_5.15%,_#A48454_13.62%,_#C7B07C_31.26%,_#BFA573_46.14%,_#C5AD78_55.71%,_#C1A670_83.29%,_#EAD9A1_99.8%)] cursor-pointer mb-1"><p className="gradient-text-btn">Connect now</p></button>
-                {message}
+                <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} name="message" className="outline-none border-b min-h-14 placeholder-[#EBEBEB]" placeholder="MESSAGE"></textarea>
+                {formErrors.message && <span className="text-red-400 text-xs">{formErrors.message}</span>}
+
+                <button onClick={handleSubmit} style={{ fontFamily: 'Helvetica' }} className="uppercase font-medium lg:mt-5 mt-4 lg:p-3 p-2 tracking-wider lg:text-sm text-xs bg-[linear-gradient(90deg,_#84613B_-10.87%,_#AA8B55_5.15%,_#A48454_13.62%,_#C7B07C_31.26%,_#BFA573_46.14%,_#C5AD78_55.71%,_#C1A670_83.29%,_#EAD9A1_99.8%)] cursor-pointer mb-1">
+                  <p className="gradient-text-btn">Connect now</p>
+                </button>
               </div>
             </form>
+
             <p className="text-[#d4d4d4] text-[10px] font-light text-justify mt-2">Note: By submitting this form, you agree to authorize fashiontv and affiliated partners, including our authorized third parties, to contact you and/or send relevant information via Email, SMS, and WhatsApp. This authorization will override any registration with the DNC/NDNC.</p>
           </div>
 
@@ -389,10 +406,25 @@ export default function Home() {
             <h4 style={{ fontFamily: 'BodoniBook' }} className="text-[28px] font-medium">Download the Sales Kit Now!</h4>
             <p className="text-lg text-[#2A3443] mt-2">Get instant access to our Sales Kit and grab the benefits of partnering with us. Download now and start your journey.</p>
 
-            <span className="w-full h-12 flex flex-row mt-6 z-[3] relative">
-              <input value={saleskitEmail.email} onChange={(e) => setSaleskitEmail({ email: e.target.value })} type="email" placeholder="Enter your email" className="text-base bg-white w-full px-4 py-3" />
-              <button onClick={() => submitSaleskitEmail()} className="bg-[#121A27] px-8 text-xs tracking-wider text-white">DOWNLOAD</button>
-            </span>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                submitSaleskitEmail();
+              }}
+              className="w-full h-12 flex flex-row mt-6 z-[3] relative"
+            >
+              <input
+                value={saleskitEmail.email}
+                onChange={(e) => setSaleskitEmail({ email: e.target.value })}
+                type="email"
+                required
+                placeholder="Enter your email"
+                className="text-base bg-white w-full px-4 py-3"
+              />
+              <button type="submit" className="bg-[#121A27] px-8 text-xs tracking-wider text-white cursor-pointer">
+                DOWNLOAD
+              </button>
+            </form>
           </div>
         </div>
         <Footer />

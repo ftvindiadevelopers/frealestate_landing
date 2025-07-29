@@ -7,10 +7,10 @@ const Footer = () => {
             <div className="max-w-[1400px] flex md:flex-row flex-col lg:gap-0 gap-10 justify-between mx-auto items-start ">
                 <div className="flex flex-col gap-7" >
                     <img className="w-[180px] h-full " src="./footer_logo.svg" alt="" />
-                    <div className="text-[#FFFFFF] flex flex-row text-sm lg:gap-20 gap-10">
+                    <div className="text-[#FFFFFF] flex flex-row text-sm flex-wrap lg:gap-20 gap-10">
                         <div className="flex items-center gap-2">
                             <img className="w-5 items-center" src="./phone.svg" alt="" />
-                            <a href="tel:+91%207873566666">7873566666</a>
+                            <a href="tel:+91%207873566666">+91 7873566666</a>
                         </div>
                         <div className="flex items-center gap-2">
                             <img className="w-5 items-center" src="./mail.svg" alt="" />
