@@ -213,113 +213,231 @@ export default function Home() {
 
 
   return (
-    <div className="w-full h-full flex flex-col pt-[100vh] overflow-x-hidden">
-      <section className="w-full h-full min-h-[700px] flex flex-col items-end bg-[url('/header.svg')] bg-cover bg-center fixed top-0">
-        <video src="./headerBg.mp4" className="w-full h-full md:block hidden absolute top-0 left-0 right-0 bottom-0 object-cover object-center z-[1]" autoPlay loop muted></video>
-        <div className="w-full md:block hidden h-full fixed bg-gradient-to-b from-[#000000be] to-[#0000] top-0 left-0 z-[2]"></div>
-        <Navbar />
-        <main className="w-full h-full max-w-[1400px] mx-auto flex flex-col gap-0 justify-center md:items-end items-start lg:pt-[20px] pt-[0vh] px-5 z-[3] relative">
-          <div className="w-fit  md:mx-0">
-            <h1 style={{ fontFamily: 'BodoniBook' }}
-              className="w-fit lg:text-[4vw] text-[8vw] lg:text-end text-start tracking-tight md:leading-[75%] leading-[80%] 
-              text-[#fff] opacity-100">
-              More than property <br /> it&apos;s a statement of style
-            </h1>
+    <div className="w-full h-full flex flex-col overflow-x-hidden">
+<section className="relative w-full min-h-screen bg-cover bg-center bg-[url('/header.svg')] overflow-hidden">
+
+  {/* VIDEO BACKGROUND */}
+  <video
+    src="./headerBg.mp4"
+    className="absolute top-0 left-0 w-full h-full object-cover z-0"
+    autoPlay
+    loop
+    muted
+    playsInline
+  />
+
+  {/* OVERLAY GRADIENT */}
+  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#000000be] to-[#0000] z-[1]"></div>
+
+  {/* CONTENT */}
+  <div className="relative z-[2] flex flex-col min-h-screen">
+    <Navbar />
+
+    <main className="flex-1 w-full max-w-[1400px] mx-auto flex flex-col gap-0 justify-center md:items-end items-start lg:pt-[20px] pt-[0vh] px-5">
+      
+      {/* HEADING */}
+      <div className="w-fit md:mx-0">
+        <h1
+          style={{ fontFamily: 'BodoniBook' }}
+          className="w-fit lg:text-[4vw] text-[8vw] lg:text-end text-start tracking-tight md:leading-[75%] leading-[80%] text-white"
+        >
+          More than property <br /> it&apos;s a statement of style
+        </h1>
+      </div>
+
+      {/* FORM BOX */}
+      <div className="bg-gradient-to-br from-[#111111] to-[#060606] md:w-[530px] max-w-full lg:p-8 p-5 rounded-xl lg:mt-10 mt-6 mb-6 w-full h-fit">
+        <h1
+          style={{ fontFamily: 'Helvetica' }}
+          className="text-white lg:text-xl text-sm uppercase font-light pb-2 max-w-full"
+        >
+          Start your brand licensing <br /> journey here
+        </h1>
+
+        <form className="text-white text-xs w-full flex flex-col md:gap-2 gap-1 mt-2">
+          <div className="flex flex-row gap-4 w-full">
+            <div className="w-full lg:basis-1/2">
+              <input
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, name: e.target.value }))
+                }
+                name="name"
+                className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full bg-transparent"
+                type="text"
+                placeholder="NAME"
+              />
+              {formErrors.name && <span className="text-red-400 text-xs">{formErrors.name}</span>}
+            </div>
+
+            <div className="w-full lg:basis-1/2">
+              <input
+                value={formData.mobile}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, mobile: e.target.value }))
+                }
+                name="mobile"
+                className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full"
+                type="tel"
+                placeholder="CONTACT"
+              />
+              {formErrors.mobile && <span className="text-red-400 text-xs">{formErrors.mobile}</span>}
+            </div>
           </div>
 
-          <div className="bg-gradient-to-br from-[#111111] to-[#060606] md:w-[530px] md:max-w-[530px]  max-w-[420px]  lg:p-8 p-5 rounded-xl lg:mt-10 mt-6 mb-6 w-full h-fit">
-            <h1 style={{ fontFamily: 'Helvetica' }} className="text-white lg:text-xl text-sm uppercase font-light pb-2 max-w-full">Start your brand licensing <br /> journey here</h1>
-            <form className="text-white text-xs w-full flex flex-col md:gap-2 gap-1 mt-2">
-              <div className="flex flex-row gap-4 w-full">
-                <div className="w-full lg:basis-1/2">
-                  <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} name="name" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full bg-transparent" type="text" placeholder="NAME" />
-                  {formErrors.name && <span className="text-red-400 text-xs">{formErrors.name}</span>}
-                </div>
-
-                <div className="w-full lg:basis-1/2">
-                  <input value={formData.mobile} onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))} name="mobile" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full" type="tel" placeholder="CONTACT" />
-                  {formErrors.mobile && <span className="text-red-400 text-xs">{formErrors.mobile}</span>}
-                </div>
-              </div>
-
-              <div>
-                <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} name="email" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full" type="email" placeholder="EMAIL" />
-                {formErrors.email && <span className="text-red-400 text-xs">{formErrors.email}</span>}
-              </div>
-
-              <div className="lg:my-1 my-0 flex flex-col lg:flex-row justify-between gap-4 text-xs">
-                <div className="w-full">
-                  <select value={formData.verticalCategory} onChange={(e) => setFormData((prev) => ({ ...prev, verticalCategory: e.target.value }))} className="w-full border-b outline-none lg:py-4 py-2 uppercase focus:outline-none" name="verticalCategory">
-                    <option className="bg-[#111111] text-white" value="">CHOOSE VERTICAL CATEGORY</option>
-                    <option className="bg-[#111111] text-white" value="Residential">Residential</option>
-                    <option className="bg-[#111111] text-white" value="Commercial">Commercial</option>
-                    <option className="bg-[#111111] text-white" value="Hospitality">Hospitality</option>
-                  </select>
-                  {formErrors.verticalCategory && <span className="text-red-400 text-xs">{formErrors.verticalCategory}</span>}
-                </div>
-
-                <div className="w-full">
-                  <select value={formData.verticalName} onChange={(e) => setFormData((prev) => ({ ...prev, verticalName: e.target.value }))} className="w-full border-b outline-none lg:py-4 py-2 uppercase" name="verticalName">
-                    <option className="bg-[#111111] text-white" value="">VERTICAL</option>
-                    {capacities.map((capacity, index) => (
-                      <option className="bg-[#111111] text-white" key={index} value={capacity}>{capacity}</option>
-                    ))}
-                  </select>
-                  {formErrors.verticalName && <span className="text-red-400 text-xs">{formErrors.verticalName}</span>}
-                </div>
-              </div>
-
-              <div className="flex flex-row justify-between gap-4">
-                <div className="w-full lg:basis-1/2">
-                  <input value={formData.developerName} onChange={(e) => setFormData((prev) => ({ ...prev, developerName: e.target.value }))} name="developerName" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full bg-transparent" type="text" placeholder="DEVELOPER NAME" />
-                  {formErrors.developerName && <span className="text-red-400 text-xs">{formErrors.developerName}</span>}
-                </div>
-
-                <div className="w-full lg:basis-1/2">
-                  <input value={formData.projectNumber} onChange={(e) => setFormData((prev) => ({ ...prev, projectNumber: e.target.value }))} name="projectNumber" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full" type="text" placeholder="NUMBER OF PROJECTS" />
-                  {formErrors.projectNumber && <span className="text-red-400 text-xs">{formErrors.projectNumber}</span>}
-                </div>
-              </div>
-
-              <div className="flex flex-row justify-between gap-4">
-                <div className="w-full lg:basis-1/2">
-                  <select value={formData.state} onChange={handleStateChange} name="state" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full">
-                    <option className="bg-[#111111] text-white" value="">SELECT STATE</option>
-                    {states.map((state, index) => (
-                      <option className="bg-[#111111] text-white" key={index} value={state.state_name}>{state.state_name}</option>
-                    ))}
-                  </select>
-                  {formErrors.state && <span className="text-red-400 text-xs">{formErrors.state}</span>}
-                </div>
-
-                <div className="w-full lg:basis-1/2">
-                  <select value={formData.city} onChange={(e) => setFormData((prev) => ({ ...prev, city: e.target.value }))} name="city" className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full">
-                    <option className="bg-[#111111] text-white" value="">SELECT CITY</option>
-                    {cities.map((city, index) => (
-                      <option className="bg-[#111111] text-white" key={index} value={city.city_name}>{city.city_name}</option>
-                    ))}
-                  </select>
-                  {formErrors.city && <span className="text-red-400 text-xs">{formErrors.city}</span>}
-                </div>
-              </div>
-
-              <div className="my-2 flex flex-col placeholder-[#EBEBEB]">
-                <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} name="message" className="outline-none border-b md:min-h-14 placeholder-[#EBEBEB]" placeholder="MESSAGE"></textarea>
-                {formErrors.message && <span className="text-red-400 text-xs">{formErrors.message}</span>}
-
-                <button onClick={handleSubmit} style={{ fontFamily: 'Helvetica' }} className="uppercase font-medium lg:mt-5 mt-4 lg:p-3 p-2 tracking-wider lg:text-sm text-xs bg-[linear-gradient(90deg,_#84613B_-10.87%,_#AA8B55_5.15%,_#A48454_13.62%,_#C7B07C_31.26%,_#BFA573_46.14%,_#C5AD78_55.71%,_#C1A670_83.29%,_#EAD9A1_99.8%)] cursor-pointer mb-1">
-                  <p className="gradient-text-btn">{message}</p>
-                </button>
-              </div>
-            </form>
-
-            <p className="text-[#d4d4d4] text-[10px] font-light text-justify mt-2">Note: By submitting this form, you agree to authorize fashiontv and affiliated partners, including our authorized third parties, to contact you and/or send relevant information via Email, SMS, and WhatsApp. This authorization will override any registration with the DNC/NDNC.</p>
+          <div>
+            <input
+              value={formData.email}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, email: e.target.value }))
+              }
+              name="email"
+              className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full"
+              type="email"
+              placeholder="EMAIL"
+            />
+            {formErrors.email && <span className="text-red-400 text-xs">{formErrors.email}</span>}
           </div>
 
+          <div className="lg:my-1 my-0 flex flex-col lg:flex-row justify-between gap-4 text-xs">
+            <div className="w-full">
+              <select
+                value={formData.verticalCategory}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, verticalCategory: e.target.value }))
+                }
+                className="w-full border-b outline-none lg:py-4 py-2 uppercase"
+                name="verticalCategory"
+              >
+                <option className="bg-[#111111] text-white" value="">CHOOSE VERTICAL CATEGORY</option>
+                <option className="bg-[#111111] text-white" value="Residential">Residential</option>
+                <option className="bg-[#111111] text-white" value="Commercial">Commercial</option>
+                <option className="bg-[#111111] text-white" value="Hospitality">Hospitality</option>
+              </select>
+              {formErrors.verticalCategory && <span className="text-red-400 text-xs">{formErrors.verticalCategory}</span>}
+            </div>
 
-          {/* <MultiStepForm/> */}
-        </main>
-      </section>
+            <div className="w-full">
+              <select
+                value={formData.verticalName}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, verticalName: e.target.value }))
+                }
+                className="w-full border-b outline-none lg:py-4 py-2 uppercase"
+                name="verticalName"
+              >
+                <option className="bg-[#111111] text-white" value="">VERTICAL</option>
+                {capacities.map((capacity, index) => (
+                  <option className="bg-[#111111] text-white" key={index} value={capacity}>
+                    {capacity}
+                  </option>
+                ))}
+              </select>
+              {formErrors.verticalName && <span className="text-red-400 text-xs">{formErrors.verticalName}</span>}
+            </div>
+          </div>
+
+          <div className="flex flex-row justify-between gap-4">
+            <div className="w-full lg:basis-1/2">
+              <input
+                value={formData.developerName}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, developerName: e.target.value }))
+                }
+                name="developerName"
+                className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full bg-transparent"
+                type="text"
+                placeholder="DEVELOPER NAME"
+              />
+              {formErrors.developerName && <span className="text-red-400 text-xs">{formErrors.developerName}</span>}
+            </div>
+
+            <div className="w-full lg:basis-1/2">
+              <input
+                value={formData.projectNumber}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, projectNumber: e.target.value }))
+                }
+                name="projectNumber"
+                className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 placeholder-[#EBEBEB] w-full"
+                type="text"
+                placeholder="NUMBER OF PROJECTS"
+              />
+              {formErrors.projectNumber && <span className="text-red-400 text-xs">{formErrors.projectNumber}</span>}
+            </div>
+          </div>
+
+          <div className="flex flex-row justify-between gap-4">
+            <div className="w-full lg:basis-1/2">
+              <select
+                value={formData.state}
+                onChange={handleStateChange}
+                name="state"
+                className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 w-full"
+              >
+                <option className="bg-[#111111] text-white" value="">SELECT STATE</option>
+                {states.map((state, index) => (
+                  <option className="bg-[#111111] text-white" key={index} value={state.state_name}>
+                    {state.state_name}
+                  </option>
+                ))}
+              </select>
+              {formErrors.state && <span className="text-red-400 text-xs">{formErrors.state}</span>}
+            </div>
+
+            <div className="w-full lg:basis-1/2">
+              <select
+                value={formData.city}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, city: e.target.value }))
+                }
+                name="city"
+                className="outline-none border-b border-[#EBEBEB] lg:py-4 py-3 w-full"
+              >
+                <option className="bg-[#111111] text-white" value="">SELECT CITY</option>
+                {cities.map((city, index) => (
+                  <option className="bg-[#111111] text-white" key={index} value={city.city_name}>
+                    {city.city_name}
+                  </option>
+                ))}
+              </select>
+              {formErrors.city && <span className="text-red-400 text-xs">{formErrors.city}</span>}
+            </div>
+          </div>
+
+          <div className="my-2 flex flex-col placeholder-[#EBEBEB]">
+            <textarea
+              value={formData.message}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, message: e.target.value }))
+              }
+              name="message"
+              className="outline-none border-b md:min-h-14 placeholder-[#EBEBEB]"
+              placeholder="MESSAGE"
+            ></textarea>
+            {formErrors.message && <span className="text-red-400 text-xs">{formErrors.message}</span>}
+
+            <button
+              onClick={handleSubmit}
+              style={{ fontFamily: 'Helvetica' }}
+              className="uppercase font-medium lg:mt-5 mt-4 lg:p-3 p-2 tracking-wider lg:text-sm text-xs bg-[linear-gradient(90deg,_#84613B_-10.87%,_#AA8B55_5.15%,_#A48454_13.62%,_#C7B07C_31.26%,_#BFA573_46.14%,_#C5AD78_55.71%,_#C1A670_83.29%,_#EAD9A1_99.8%)] cursor-pointer mb-1"
+            >
+              <p className="gradient-text-btn">{message}</p>
+            </button>
+          </div>
+        </form>
+
+        <p className="text-[#d4d4d4] text-[10px] font-light text-justify mt-2">
+          Note: By submitting this form, you agree to authorize fashiontv and affiliated partners,
+          including our authorized third parties, to contact you and/or send relevant information
+          via Email, SMS, and WhatsApp. This authorization will override any registration with the
+          DNC/NDNC.
+        </p>
+      </div>
+    </main>
+  </div>
+</section>
+
 
       <section className="w-full h-full lg:min-h-[150vh] bg-white relative">
         <Image alt="goldenFLogo" src="./goldenF.svg" width={335} height={640} className="absolute lg:w-fit lg:h-fit w-[50px] top-[14vh] lg:left-10 left-4 z-[1]" />
